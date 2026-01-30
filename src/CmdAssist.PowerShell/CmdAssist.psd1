@@ -6,7 +6,7 @@
     ModuleVersion = '1.0.0'
     
     # ID used to uniquely identify this module
-    GUID = '12345678-1234-1234-1234-123456789abc'
+    GUID = 'adc41e35-80bd-482b-ad3b-7e876b571cb2'
     
     # Author of this module
     Author = 'CmdAssist'
@@ -21,7 +21,7 @@
     Description = 'AI-powered command line assistant for PowerShell'
     
     # Minimum version of the PowerShell engine required by this module
-    PowerShellVersion = '7.0'
+    PowerShellVersion = '7.4'
     
     # Functions to export from this module
     FunctionsToExport = @()
@@ -45,7 +45,7 @@
             LicenseUri = 'https://opensource.org/licenses/MIT'
             
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/cmdassist/cmdassist'
+            ProjectUri = 'https://github.com/kunalk16/cmdassist'
             
             # ReleaseNotes of this module
             ReleaseNotes = 'Initial release of CmdAssist PowerShell module'
