@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Microsoft.Extensions.Logging;
 
@@ -27,10 +28,24 @@ public class PowerShellCommandExecutionService : ICommandExecutionService
 
             var results = powerShell.Invoke();
 
-            // Display results
-            foreach (var result in results)
+            // Display results using PowerShell's default formatting
+            if (results.Any())
             {
-                Console.WriteLine(result?.ToString());
+                // Use Out-String directly to get PowerShell's default formatting
+                using var formatPowerShell = System.Management.Automation.PowerShell.Create();
+                formatPowerShell.AddCommand("Out-String")
+                    .AddParameter("InputObject", results)
+                    .AddParameter("Width", Console.WindowWidth > 0 ? Console.WindowWidth : 120);
+                
+                var formattedResults = formatPowerShell.Invoke();
+                foreach (var formatted in formattedResults)
+                {
+                    var output = formatted?.ToString()?.TrimEnd('\r', '\n');
+                    if (!string.IsNullOrEmpty(output))
+                    {
+                        Console.WriteLine(output);
+                    }
+                }
             }
 
             // Display errors if any
@@ -65,9 +80,23 @@ public class PowerShellCommandExecutionService : ICommandExecutionService
             var results = await Task.Run(() => powerShell.Invoke());
             var output = new StringBuilder();
 
-            foreach (var result in results)
+            // Format results using PowerShell's default formatting
+            if (results.Any())
             {
-                output.AppendLine(result?.ToString());
+                using var formatPowerShell = System.Management.Automation.PowerShell.Create();
+                formatPowerShell.AddCommand("Out-String")
+                    .AddParameter("InputObject", results)
+                    .AddParameter("Width", 120);
+                
+                var formattedResults = formatPowerShell.Invoke();
+                foreach (var formatted in formattedResults)
+                {
+                    var formattedOutput = formatted?.ToString()?.TrimEnd('\r', '\n');
+                    if (!string.IsNullOrEmpty(formattedOutput))
+                    {
+                        output.AppendLine(formattedOutput);
+                    }
+                }
             }
 
             if (powerShell.HadErrors)
