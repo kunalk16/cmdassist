@@ -16,13 +16,13 @@ CmdAssist is a PowerShell module that provides AI-powered command line assistanc
 ### Prerequisites
 
 - .NET 8.0 SDK or later
-- PowerShell 5.1 or later
+- PowerShell 7.4 or later
 
 ### Build from Source
 
 1. Clone the repository:
 ```powershell
-git clone https://github.com/cmdassist/cmdassist.git
+git clone https://github.com/kunalk16/cmdassist.git
 cd cmdassist
 ```
 
