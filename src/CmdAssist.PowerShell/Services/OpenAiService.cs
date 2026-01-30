@@ -48,7 +48,7 @@ public class OpenAiService : IOpenAiService
                     new { role = "user", content = userPrompt }
                 },
                 temperature = request.Temperature,
-                max_tokens = request.MaxTokens
+                max_completion_tokens = request.MaxTokens
             };
 
             var json = JsonSerializer.Serialize(requestBody);
