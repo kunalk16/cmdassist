@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using CmdAssist.PowerShell.Models;
 using CmdAssist.PowerShell.Constants;
+using CmdAssist.PowerShell.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace CmdAssist.PowerShell.Services;

@@ -3,12 +3,12 @@
 
 using CmdAssist.PowerShell.Models;
 
-namespace CmdAssist.PowerShell.Services;
+namespace CmdAssist.PowerShell.Services.Interfaces;
 
 /// <summary>
-/// Llama service interface
+/// OpenAI service interface
 /// </summary>
-public interface ILlamaService
+public interface IOpenAiService
 {
     Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request);
 }

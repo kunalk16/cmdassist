@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
 using CmdAssist.PowerShell.Models;
+using CmdAssist.PowerShell.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace CmdAssist.PowerShell.Services;

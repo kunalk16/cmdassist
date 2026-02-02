@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using CmdAssist.PowerShell.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace CmdAssist.PowerShell.Services;

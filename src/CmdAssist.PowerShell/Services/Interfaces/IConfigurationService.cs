@@ -3,7 +3,7 @@
 
 using CmdAssist.PowerShell.Models;
 
-namespace CmdAssist.PowerShell.Services;
+namespace CmdAssist.PowerShell.Services.Interfaces;
 
 /// <summary>
 /// Configuration service interface

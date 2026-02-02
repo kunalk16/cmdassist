@@ -3,12 +3,12 @@
 
 using CmdAssist.PowerShell.Models;
 
-namespace CmdAssist.PowerShell.Services;
+namespace CmdAssist.PowerShell.Services.Interfaces;
 
 /// <summary>
-/// Claude service interface
+/// Llama service interface
 /// </summary>
-public interface IClaudeService
+public interface ILlamaService
 {
     Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request);
 }

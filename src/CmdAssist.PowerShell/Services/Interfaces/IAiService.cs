@@ -3,12 +3,12 @@
 
 using CmdAssist.PowerShell.Models;
 
-namespace CmdAssist.PowerShell.Services;
+namespace CmdAssist.PowerShell.Services.Interfaces;
 
 /// <summary>
-/// OpenAI service interface
+/// Main AI service interface
 /// </summary>
-public interface IOpenAiService
+public interface IAiService
 {
     Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request);
 }

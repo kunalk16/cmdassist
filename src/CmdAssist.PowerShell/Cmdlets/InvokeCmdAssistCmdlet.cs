@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CmdAssist.PowerShell.Services;
+using CmdAssist.PowerShell.Services.Interfaces;
 using CmdAssist.PowerShell.Models;
 
 namespace CmdAssist.PowerShell.Cmdlets;
