@@ -51,6 +51,18 @@ public class ConfigurationService : IConfigurationService
                 ApiKey = _configuration["LLAMA_API_KEY"] ?? string.Empty,
                 ApiUrl = _configuration["LLAMA_API_URL"] ?? string.Empty,
                 Model = _configuration["LLAMA_MODEL"] ?? "llama2-70b-chat"
+            },
+            Gemini = new GeminiConfiguration
+            {
+                ApiKey = _configuration["GEMINI_API_KEY"] ?? string.Empty,
+                ApiUrl = _configuration["GEMINI_API_URL"] ?? "https://generativelanguage.googleapis.com/v1",
+                Model = _configuration["GEMINI_MODEL"] ?? "gemini-pro"
+            },
+            DeepSeek = new DeepSeekConfiguration
+            {
+                ApiKey = _configuration["DEEPSEEK_API_KEY"] ?? string.Empty,
+                ApiUrl = _configuration["DEEPSEEK_API_URL"] ?? "https://api.deepseek.com/v1",
+                Model = _configuration["DEEPSEEK_MODEL"] ?? "deepseek-chat"
             }
         };
     }

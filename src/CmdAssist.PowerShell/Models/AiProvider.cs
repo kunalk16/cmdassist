@@ -11,5 +11,7 @@ public enum AiProvider
     OpenAI,
     AzureOpenAI,
     Claude,
-    Llama
+    Llama,
+    Gemini,
+    DeepSeek
 }

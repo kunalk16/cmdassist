@@ -71,6 +71,29 @@ Write-Host ""
 # $env:LLAMA_API_KEY = "example-key-replace-with-real-key"
 # $env:LLAMA_MODEL = "llama2-70b-chat"
 
+# Gemini Configuration
+Write-Host "🔮 Google Gemini Configuration:" -ForegroundColor Green
+Write-Host "Set the following environment variables for Gemini:" -ForegroundColor Gray
+Write-Host '$env:GEMINI_API_KEY = "your-gemini-api-key"' -ForegroundColor White
+Write-Host '$env:GEMINI_MODEL = "gemini-pro"  # Optional, defaults to gemini-pro' -ForegroundColor Gray
+Write-Host ""
+
+# Example (DO NOT USE IN PRODUCTION):
+# $env:GEMINI_API_KEY = "example-key-replace-with-real-key"
+# $env:GEMINI_MODEL = "gemini-pro"
+
+# DeepSeek Configuration
+Write-Host "🔍 DeepSeek Configuration:" -ForegroundColor Green
+Write-Host "Set the following environment variables for DeepSeek:" -ForegroundColor Gray
+Write-Host '$env:DEEPSEEK_API_KEY = "your-deepseek-api-key"' -ForegroundColor White
+Write-Host '$env:DEEPSEEK_API_URL = "https://api.deepseek.com/v1"  # Optional' -ForegroundColor Gray
+Write-Host '$env:DEEPSEEK_MODEL = "deepseek-chat"  # Optional' -ForegroundColor Gray
+Write-Host ""
+
+# Example (DO NOT USE IN PRODUCTION):
+# $env:DEEPSEEK_API_KEY = "example-key-replace-with-real-key"
+# $env:DEEPSEEK_MODEL = "deepseek-coder"
+
 Write-Host "📋 Quick Setup Instructions:" -ForegroundColor Cyan
 Write-Host "1. Copy this file: Copy-Item setup-env.example.ps1 setup-env.local.ps1" -ForegroundColor Gray
 Write-Host "2. Edit the local file with your real API keys" -ForegroundColor Gray
@@ -99,6 +122,8 @@ function Test-CmdAssistEnvironment {
         "Azure OpenAI" = @("AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT_NAME")
         "Claude" = @("CLAUDE_API_KEY")
         "Llama" = @("LLAMA_API_URL")
+        "Gemini" = @("GEMINI_API_KEY")
+        "DeepSeek" = @("DEEPSEEK_API_KEY")
     }
     
     foreach ($provider in $providers.Keys) {

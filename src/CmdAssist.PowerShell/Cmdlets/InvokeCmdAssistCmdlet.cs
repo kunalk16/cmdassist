@@ -35,10 +35,10 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
     public SwitchParameter Confirm { get; set; }
 
     /// <summary>
-    /// Specifies which AI provider to use (OpenAI, AzureOpenAI, Claude, Llama)
+    /// Specifies which AI provider to use (OpenAI, AzureOpenAI, Claude, Llama, Gemini, DeepSeek)
     /// </summary>
     [Parameter(Mandatory = false)]
-    [ValidateSet("OpenAI", "AzureOpenAI", "Claude", "Llama")]
+    [ValidateSet("OpenAI", "AzureOpenAI", "Claude", "Llama", "Gemini", "DeepSeek")]
     public string Provider { get; set; } = "OpenAI";
 
     private IServiceProvider? _serviceProvider;
@@ -184,6 +184,8 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
         services.AddSingleton<IAzureOpenAiService, AzureOpenAiService>();
         services.AddSingleton<IClaudeService, ClaudeService>();
         services.AddSingleton<ILlamaService, LlamaService>();
+        services.AddSingleton<IGeminiService, GeminiService>();
+        services.AddSingleton<IDeepSeekService, DeepSeekService>();
 
         // Add command execution service
         services.AddSingleton<ICommandExecutionService, PowerShellCommandExecutionService>();

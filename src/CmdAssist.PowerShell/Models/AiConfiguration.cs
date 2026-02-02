@@ -12,4 +12,6 @@ public class AiConfiguration
     public AzureOpenAiConfiguration AzureOpenAI { get; set; } = new();
     public ClaudeConfiguration Claude { get; set; } = new();
     public LlamaConfiguration Llama { get; set; } = new();
+    public GeminiConfiguration Gemini { get; set; } = new();
+    public DeepSeekConfiguration DeepSeek { get; set; } = new();
 }

@@ -4,7 +4,7 @@ CmdAssist is a PowerShell module that provides AI-powered command line assistanc
 
 ## Features
 
-- 🤖 **Multiple AI Providers**: Support for OpenAI, Azure OpenAI, Claude, and Llama
+- 🤖 **Multiple AI Providers**: Support for OpenAI, Azure OpenAI, Claude, Llama, Google Gemini, and DeepSeek
 - ⚡ **PowerShell Integration**: Native PowerShell cmdlet with proper parameter support
 - 🛡️ **Safety First**: Confirmation prompts before executing potentially dangerous commands
 - 📋 **Clipboard Support**: Copy commands to clipboard without execution
@@ -68,6 +68,28 @@ $env:LLAMA_API_KEY = "your-api-key"  # Optional, depending on your setup
 $env:LLAMA_MODEL = "llama2-70b-chat"  # Optional
 ```
 
+### Google Gemini
+```powershell
+$env:GEMINI_API_KEY = "your-gemini-api-key"
+$env:GEMINI_MODEL = "gemini-pro"  # Optional, defaults to gemini-pro
+```
+
+### DeepSeek
+```powershell
+$env:DEEPSEEK_API_KEY = "your-deepseek-api-key"
+$env:DEEPSEEK_API_URL = "https://api.deepseek.com/v1"  # Optional
+$env:DEEPSEEK_MODEL = "deepseek-chat"  # Optional, defaults to deepseek-chat
+```
+
+### API Key Resources
+
+- **OpenAI**: [Get your API key at platform.openai.com](https://platform.openai.com/api-keys)
+- **Azure OpenAI**: [Set up through Azure Portal](https://portal.azure.com/)
+- **Claude**: [Get API access at console.anthropic.com](https://console.anthropic.com/)
+- **Llama**: Use any Llama-compatible endpoint (Ollama, LM Studio, etc.)
+- **Google Gemini**: [Get API key at aistudio.google.com](https://aistudio.google.com/app/apikey)
+- **DeepSeek**: [Register at platform.deepseek.com](https://platform.deepseek.com/)
+
 ## Usage
 
 ### Basic Usage
@@ -120,7 +142,7 @@ When you run a command without the `-Confirm` switch, CmdAssist will:
 
 - `Prompt` (Position 0, Mandatory): The natural language description of what you want to accomplish
 - `Confirm` (Switch): Execute the command without confirmation prompt
-- `Provider` (Optional): Specify AI provider (OpenAI, AzureOpenAI, Claude, Llama)
+- `Provider` (Optional): Specify AI provider (OpenAI, AzureOpenAI, Claude, Llama, Gemini, DeepSeek)
 - `Verbose` (Switch): Enable verbose output for debugging
 
 ## Safety Features
