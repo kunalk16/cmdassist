@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Kunal Karmakar
+# Licensed under the MIT License. See LICENSE file in the project root for full license information.
+
 @{
     # Script module or binary module file associated with this manifest
     RootModule = 'CmdAssist.PowerShell.dll'
