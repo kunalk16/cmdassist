@@ -18,15 +18,18 @@ public class LlamaService : ILlamaService
     private readonly HttpClient _httpClient;
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<LlamaService> _logger;
+    private readonly IHttpPolicyService _httpPolicyService;
 
     public LlamaService(
         HttpClient httpClient,
         IConfigurationService configurationService,
-        ILogger<LlamaService> logger)
+        ILogger<LlamaService> logger,
+        IHttpPolicyService httpPolicyService)
     {
         _httpClient = httpClient;
         _configurationService = configurationService;
         _logger = logger;
+        _httpPolicyService = httpPolicyService;
     }
 
     public async Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request)
@@ -75,7 +78,9 @@ public class LlamaService : ILlamaService
             
             _logger.LogDebug("Sending request to Llama: {Url}", url);
 
-            var response = await _httpClient.PostAsync(url, content);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync(url, content));
             
             if (!response.IsSuccessStatusCode)
             {
@@ -136,7 +141,9 @@ public class LlamaService : ILlamaService
                 url += "/completions";
             }
 
-            var response = await _httpClient.PostAsync(url, content);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync(url, content));
             
             if (!response.IsSuccessStatusCode)
             {

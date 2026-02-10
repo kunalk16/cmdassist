@@ -18,15 +18,18 @@ public class OpenAiService : IOpenAiService
     private readonly HttpClient _httpClient;
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<OpenAiService> _logger;
+    private readonly IHttpPolicyService _httpPolicyService;
 
     public OpenAiService(
         HttpClient httpClient,
         IConfigurationService configurationService,
-        ILogger<OpenAiService> logger)
+        ILogger<OpenAiService> logger,
+        IHttpPolicyService httpPolicyService)
     {
         _httpClient = httpClient;
         _configurationService = configurationService;
         _logger = logger;
+        _httpPolicyService = httpPolicyService;
     }
 
     public async Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request)
@@ -68,7 +71,9 @@ public class OpenAiService : IOpenAiService
 
             _logger.LogDebug("Sending request to OpenAI: {Url}", $"{config.ApiUrl}/chat/completions");
 
-            var response = await _httpClient.PostAsync($"{config.ApiUrl}/chat/completions", content);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync($"{config.ApiUrl}/chat/completions", content));
             
             if (!response.IsSuccessStatusCode)
             {

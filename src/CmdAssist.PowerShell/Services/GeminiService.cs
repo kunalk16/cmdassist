@@ -18,15 +18,18 @@ public class GeminiService : IGeminiService
     private readonly HttpClient _httpClient;
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<GeminiService> _logger;
+    private readonly IHttpPolicyService _httpPolicyService;
 
     public GeminiService(
         HttpClient httpClient,
         IConfigurationService configurationService,
-        ILogger<GeminiService> logger)
+        ILogger<GeminiService> logger,
+        IHttpPolicyService httpPolicyService)
     {
         _httpClient = httpClient;
         _configurationService = configurationService;
         _logger = logger;
+        _httpPolicyService = httpPolicyService;
     }
 
     public async Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request)
@@ -72,7 +75,9 @@ public class GeminiService : IGeminiService
             
             _logger.LogInformation("Sending request to Gemini API");
             
-            var response = await _httpClient.PostAsync(requestUrl, httpContent);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync(requestUrl, httpContent));
             
             if (!response.IsSuccessStatusCode)
             {

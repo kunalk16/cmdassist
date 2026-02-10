@@ -18,15 +18,18 @@ public class AzureOpenAiService : IAzureOpenAiService
     private readonly HttpClient _httpClient;
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<AzureOpenAiService> _logger;
+    private readonly IHttpPolicyService _httpPolicyService;
 
     public AzureOpenAiService(
         HttpClient httpClient,
         IConfigurationService configurationService,
-        ILogger<AzureOpenAiService> logger)
+        ILogger<AzureOpenAiService> logger,
+        IHttpPolicyService httpPolicyService)
     {
         _httpClient = httpClient;
         _configurationService = configurationService;
         _logger = logger;
+        _httpPolicyService = httpPolicyService;
     }
 
     public async Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request)
@@ -65,7 +68,9 @@ public class AzureOpenAiService : IAzureOpenAiService
             
             _logger.LogDebug("Sending request to Azure OpenAI: {Url}", url);
 
-            var response = await _httpClient.PostAsync(url, content);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync(url, content));
             
             if (!response.IsSuccessStatusCode)
             {
