@@ -186,6 +186,9 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
         // Add HTTP client
         services.AddHttpClient();
 
+        // Add HTTP policy service
+        services.AddSingleton<IHttpPolicyService, HttpPolicyService>();
+
         // Add AI services
         services.AddSingleton<IAiService, AiService>();
         services.AddSingleton<IOpenAiService, OpenAiService>();

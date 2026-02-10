@@ -18,15 +18,18 @@ public class DeepSeekService : IDeepSeekService
     private readonly HttpClient _httpClient;
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<DeepSeekService> _logger;
+    private readonly IHttpPolicyService _httpPolicyService;
 
     public DeepSeekService(
         HttpClient httpClient,
         IConfigurationService configurationService,
-        ILogger<DeepSeekService> logger)
+        ILogger<DeepSeekService> logger,
+        IHttpPolicyService httpPolicyService)
     {
         _httpClient = httpClient;
         _configurationService = configurationService;
         _logger = logger;
+        _httpPolicyService = httpPolicyService;
     }
 
     public async Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request)
@@ -72,7 +75,9 @@ public class DeepSeekService : IDeepSeekService
             
             _logger.LogInformation("Sending request to DeepSeek API");
             
-            var response = await _httpClient.PostAsync(requestUrl, httpContent);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync(requestUrl, httpContent));
             
             if (!response.IsSuccessStatusCode)
             {

@@ -18,15 +18,18 @@ public class ClaudeService : IClaudeService
     private readonly HttpClient _httpClient;
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<ClaudeService> _logger;
+    private readonly IHttpPolicyService _httpPolicyService;
 
     public ClaudeService(
         HttpClient httpClient,
         IConfigurationService configurationService,
-        ILogger<ClaudeService> logger)
+        ILogger<ClaudeService> logger,
+        IHttpPolicyService httpPolicyService)
     {
         _httpClient = httpClient;
         _configurationService = configurationService;
         _logger = logger;
+        _httpPolicyService = httpPolicyService;
     }
 
     public async Task<AiResponse?> GetCommandSuggestionAsync(AiRequest request)
@@ -64,7 +67,9 @@ public class ClaudeService : IClaudeService
 
             _logger.LogDebug("Sending request to Claude: {Url}", $"{config.ApiUrl}/messages");
 
-            var response = await _httpClient.PostAsync($"{config.ApiUrl}/messages", content);
+            var policy = _httpPolicyService.GetAiHttpPolicy();
+            var response = await policy.ExecuteAsync(async _ => 
+                await _httpClient.PostAsync($"{config.ApiUrl}/messages", content));
             
             if (!response.IsSuccessStatusCode)
             {
