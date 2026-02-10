@@ -29,10 +29,8 @@ jobs:
     - name: Build solution
       run: dotnet build --configuration Release --no-restore
       
-    - name: Setup PowerShell
-      uses: microsoft/setup-powershell@v1
-      
     - name: Execute publish script
-      run: |
-        pwsh -File ./publish.ps1
-      shell: bash
+      env:
+        PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+      run: .\publish.ps1
+      shell: pwsh
