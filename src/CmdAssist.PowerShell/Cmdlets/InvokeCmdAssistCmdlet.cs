@@ -102,11 +102,15 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
             }
 
             // Display the suggested command
-            Host.UI.WriteLine(ConsoleColor.Green, Host.UI.RawUI.BackgroundColor, $"Suggested command: {response.Command}");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Suggested command: {response.Command}");
+            Console.ResetColor();
             
             if (!string.IsNullOrWhiteSpace(response.Explanation))
             {
-                Host.UI.WriteLine(ConsoleColor.Yellow, Host.UI.RawUI.BackgroundColor, $"Explanation: {response.Explanation}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Explanation: {response.Explanation}");
+                Console.ResetColor();
             }
 
             // Execute based on confirmation setting
@@ -132,10 +136,14 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
                         break;
                     case 2: // Copy
                         CopyToClipboard(response.Command);
-                        Host.UI.WriteLine(ConsoleColor.Cyan, Host.UI.RawUI.BackgroundColor, "Command copied to clipboard.");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Command copied to clipboard.");
+                        Console.ResetColor();
                         return;
                     default: // No
-                        Host.UI.WriteLine(ConsoleColor.Gray, Host.UI.RawUI.BackgroundColor, "Command not executed.");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine("Command not executed.");
+                        Console.ResetColor();
                         return;
                 }
             }
