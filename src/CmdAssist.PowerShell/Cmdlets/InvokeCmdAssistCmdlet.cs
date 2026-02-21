@@ -199,7 +199,11 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
         services.AddSingleton<IDeepSeekService, DeepSeekService>();
 
         // Add command execution service
-        services.AddSingleton<ICommandExecutionService, PowerShellCommandExecutionService>();
+        services.AddSingleton<ICommandExecutionService>(serviceProvider =>
+        {
+            var logger = serviceProvider.GetRequiredService<ILogger<PowerShellCommandExecutionService>>();
+            return new PowerShellCommandExecutionService(logger, this);
+        });
 
         // Add configuration
         services.AddSingleton<IConfigurationService, ConfigurationService>();
