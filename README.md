@@ -193,6 +193,8 @@ cmdassist/
 │       ├── Models/                  # Data models and DTOs
 │       ├── CmdAssist.psd1          # PowerShell module manifest
 │       └── CmdAssist.PowerShell.csproj
+├── tests/
+│   └── CmdAssist.PowerShell.Tests/  # Unit tests
 ├── Directory.Build.props            # Common build properties
 ├── Directory.Packages.props         # Package version management
 ├── global.json                      # .NET SDK version
