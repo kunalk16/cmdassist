@@ -1,8 +1,7 @@
 // Copyright (c) 2026 Kunal Karmakar
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
-using System.Diagnostics;
-using System.Linq;
+using System.Management.Automation;
 using System.Text;
 using CmdAssist.PowerShell.Services.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -15,10 +14,13 @@ namespace CmdAssist.PowerShell.Services;
 public class PowerShellCommandExecutionService : ICommandExecutionService
 {
     private readonly ILogger<PowerShellCommandExecutionService> _logger;
+    private readonly PSCmdlet _psCmdlet;
 
-    public PowerShellCommandExecutionService(ILogger<PowerShellCommandExecutionService> logger)
+    public PowerShellCommandExecutionService(ILogger<PowerShellCommandExecutionService> logger,
+        PSCmdlet psCmdlet)
     {
         _logger = logger;
+        _psCmdlet = psCmdlet;
     }
 
     public void ExecuteCommand(string command)
@@ -27,40 +29,11 @@ public class PowerShellCommandExecutionService : ICommandExecutionService
         {
             _logger.LogInformation("Executing command: {Command}", command);
 
-            using var powerShell = System.Management.Automation.PowerShell.Create();
-            powerShell.AddScript(command);
+            var results = _psCmdlet.SessionState.InvokeCommand.InvokeScript(command);
 
-            var results = powerShell.Invoke();
-
-            // Display results using PowerShell's default formatting
-            if (results.Any())
+            foreach (var result in results)
             {
-                // Use Out-String directly to get PowerShell's default formatting
-                using var formatPowerShell = System.Management.Automation.PowerShell.Create();
-                formatPowerShell.AddCommand("Out-String")
-                    .AddParameter("InputObject", results)
-                    .AddParameter("Width", Console.WindowWidth > 0 ? Console.WindowWidth : 120);
-                
-                var formattedResults = formatPowerShell.Invoke();
-                foreach (var formatted in formattedResults)
-                {
-                    var output = formatted?.ToString()?.TrimEnd('\r', '\n');
-                    if (!string.IsNullOrEmpty(output))
-                    {
-                        Console.WriteLine(output);
-                    }
-                }
-            }
-
-            // Display errors if any
-            if (powerShell.HadErrors)
-            {
-                foreach (var error in powerShell.Streams.Error)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Error: {error}");
-                    Console.ResetColor();
-                }
+                _psCmdlet.WriteObject(result);
             }
         }
         catch (Exception ex)
