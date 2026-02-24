@@ -3,16 +3,8 @@
 
 namespace CmdAssist.PowerShell.Models;
 
-/// <summary>
-/// Supported AI providers
-/// </summary>
-public enum AiProvider
+public class OllamaConfiguration
 {
-    OpenAI,
-    AzureOpenAI,
-    Claude,
-    Llama,
-    Gemini,
-    DeepSeek,
-    Ollama
+    public string Endpoint { get; set; } = "http://localhost:11434";
+    public string Model { get; set; } = "qwen3";
 }

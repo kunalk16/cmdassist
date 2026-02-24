@@ -15,6 +15,7 @@ public class AiServiceTests
     private readonly Mock<ILlamaService> _mockLlamaService;
     private readonly Mock<IGeminiService> _mockGeminiService;
     private readonly Mock<IDeepSeekService> _mockDeepSeekService;
+    private readonly Mock<IOllamaService> _mockOllamaService;
     private readonly Mock<ILogger<AiService>> _mockLogger;
     private readonly AiService _aiService;
 
@@ -26,6 +27,7 @@ public class AiServiceTests
         _mockLlamaService = new Mock<ILlamaService>();
         _mockGeminiService = new Mock<IGeminiService>();
         _mockDeepSeekService = new Mock<IDeepSeekService>();
+        _mockOllamaService = new Mock<IOllamaService>();
         _mockLogger = new Mock<ILogger<AiService>>();
 
         _aiService = new AiService(
@@ -35,6 +37,7 @@ public class AiServiceTests
             _mockLlamaService.Object,
             _mockGeminiService.Object,
             _mockDeepSeekService.Object,
+            _mockOllamaService.Object,
             _mockLogger.Object);
     }
 
@@ -49,6 +52,7 @@ public class AiServiceTests
             _mockLlamaService.Object,
             _mockGeminiService.Object,
             _mockDeepSeekService.Object,
+            _mockOllamaService.Object,
             _mockLogger.Object);
 
         // Assert

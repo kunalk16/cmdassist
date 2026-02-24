@@ -94,6 +94,19 @@ Write-Host ""
 # $env:DEEPSEEK_API_KEY = "example-key-replace-with-real-key"
 # $env:DEEPSEEK_MODEL = "deepseek-coder"
 
+# Ollama Configuration
+Write-Host "🦙 Ollama Configuration:" -ForegroundColor Green
+Write-Host "Set the following environment variables for Ollama (local AI):" -ForegroundColor Gray
+Write-Host '$env:OLLAMA_ENDPOINT = "http://localhost:11434"  # Optional, defaults to localhost:11434' -ForegroundColor White
+Write-Host '$env:OLLAMA_MODEL = "qwen3"  # Required, must match a pulled model' -ForegroundColor White
+Write-Host "First install Ollama from https://ollama.ai and pull a model:" -ForegroundColor Gray
+Write-Host "ollama pull qwen3" -ForegroundColor Gray
+Write-Host ""
+
+# Example:
+# $env:OLLAMA_ENDPOINT = "http://localhost:11434"
+# $env:OLLAMA_MODEL = "qwen3"
+
 Write-Host "📋 Quick Setup Instructions:" -ForegroundColor Cyan
 Write-Host "1. Copy this file: Copy-Item setup-env.example.ps1 setup-env.local.ps1" -ForegroundColor Gray
 Write-Host "2. Edit the local file with your real API keys" -ForegroundColor Gray
@@ -124,6 +137,7 @@ function Test-CmdAssistEnvironment {
         "Llama" = @("LLAMA_API_URL")
         "Gemini" = @("GEMINI_API_KEY")
         "DeepSeek" = @("DEEPSEEK_API_KEY")
+        "Ollama" = @("OLLAMA_MODEL")
     }
     
     foreach ($provider in $providers.Keys) {

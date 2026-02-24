@@ -4,7 +4,7 @@ CmdAssist is a PowerShell module that provides AI-powered command line assistanc
 
 ## Features
 
-- 🤖 **Multiple AI Providers**: Support for OpenAI, Azure OpenAI, Claude, Llama, Google Gemini, and DeepSeek
+- 🤖 **Multiple AI Providers**: Support for OpenAI, Azure OpenAI, Claude, Llama, Google Gemini, DeepSeek, and Ollama
 - ⚡ **PowerShell Integration**: Native PowerShell cmdlet with proper parameter support
 - 🛡️ **Safety First**: Confirmation prompts before executing potentially dangerous commands
 - 📋 **Clipboard Support**: Copy commands to clipboard without execution
@@ -81,6 +81,18 @@ $env:DEEPSEEK_API_URL = "https://api.deepseek.com/v1"  # Optional
 $env:DEEPSEEK_MODEL = "deepseek-chat"  # Optional, defaults to deepseek-chat
 ```
 
+### Ollama
+```powershell
+$env:OLLAMA_ENDPOINT = "http://localhost:11434"  # Optional, defaults to localhost:11434
+$env:OLLAMA_MODEL = "qwen3"  # Required, must match a model you've pulled
+```
+
+**Note**: Ollama requires a local installation. Install from [ollama.ai](https://ollama.ai), then pull a model:
+```bash
+ollama pull qwen3
+# or other models like: codellama, mistral, llama3
+```
+
 ### API Key Resources
 
 - **OpenAI**: [Get your API key at platform.openai.com](https://platform.openai.com/api-keys)
@@ -89,6 +101,7 @@ $env:DEEPSEEK_MODEL = "deepseek-chat"  # Optional, defaults to deepseek-chat
 - **Llama**: Use any Llama-compatible endpoint (Ollama, LM Studio, etc.)
 - **Google Gemini**: [Get API key at aistudio.google.com](https://aistudio.google.com/app/apikey)
 - **DeepSeek**: [Register at platform.deepseek.com](https://platform.deepseek.com/)
+- **Ollama**: [Download from ollama.ai](https://ollama.ai) for local AI models
 
 ## Usage
 
@@ -103,6 +116,7 @@ cmd-assist "create a new folder called 'documents'" -Confirm
 
 # Use a specific AI provider
 cmd-assist "show disk usage" -Provider Claude
+cmd-assist "list files sorted by size" -Provider Ollama
 
 # Enable verbose output
 cmd-assist "find large files" -Verbose
@@ -142,7 +156,7 @@ When you run a command without the `-Confirm` switch, CmdAssist will:
 
 - `Prompt` (Position 0, Mandatory): The natural language description of what you want to accomplish
 - `Confirm` (Switch): Execute the command without confirmation prompt
-- `Provider` (Optional): Specify AI provider (OpenAI, AzureOpenAI, Claude, Llama, Gemini, DeepSeek)
+- `Provider` (Optional): Specify AI provider (OpenAI, AzureOpenAI, Claude, Llama, Gemini, DeepSeek, Ollama)
 - `Verbose` (Switch): Enable verbose output for debugging
 
 ## Safety Features
