@@ -38,7 +38,7 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
     /// Specifies which AI provider to use (OpenAI, AzureOpenAI, Claude, Llama, Gemini, DeepSeek)
     /// </summary>
     [Parameter(Mandatory = false)]
-    [ValidateSet("OpenAI", "AzureOpenAI", "Claude", "Llama", "Gemini", "DeepSeek")]
+    [ValidateSet("OpenAI", "AzureOpenAI", "Claude", "Llama", "Gemini", "DeepSeek","Ollama")]
     public string Provider { get; set; } = "OpenAI";
 
     private IServiceProvider? _serviceProvider;
@@ -197,6 +197,7 @@ public class InvokeCmdAssistCmdlet : PSCmdlet
         services.AddSingleton<ILlamaService, LlamaService>();
         services.AddSingleton<IGeminiService, GeminiService>();
         services.AddSingleton<IDeepSeekService, DeepSeekService>();
+        services.AddSingleton<IOllamaService, OllamaService>();
 
         // Add command execution service
         services.AddSingleton<ICommandExecutionService>(serviceProvider =>

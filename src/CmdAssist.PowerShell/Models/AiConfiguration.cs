@@ -14,4 +14,5 @@ public class AiConfiguration
     public LlamaConfiguration Llama { get; set; } = new();
     public GeminiConfiguration Gemini { get; set; } = new();
     public DeepSeekConfiguration DeepSeek { get; set; } = new();
+    public OllamaConfiguration Ollama { get; set; } = new();
 }

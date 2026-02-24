@@ -18,6 +18,7 @@ public class AiService : IAiService
     private readonly ILlamaService _llamaService;
     private readonly IGeminiService _geminiService;
     private readonly IDeepSeekService _deepSeekService;
+    private readonly IOllamaService _ollamaService;
     private readonly ILogger<AiService> _logger;
 
     public AiService(
@@ -27,6 +28,7 @@ public class AiService : IAiService
         ILlamaService llamaService,
         IGeminiService geminiService,
         IDeepSeekService deepSeekService,
+        IOllamaService ollamaService,
         ILogger<AiService> logger)
     {
         _openAiService = openAiService;
@@ -35,6 +37,7 @@ public class AiService : IAiService
         _llamaService = llamaService;
         _geminiService = geminiService;
         _deepSeekService = deepSeekService;
+        _ollamaService = ollamaService;
         _logger = logger;
     }
 
@@ -52,6 +55,7 @@ public class AiService : IAiService
                 AiProvider.Llama => await _llamaService.GetCommandSuggestionAsync(request),
                 AiProvider.Gemini => await _geminiService.GetCommandSuggestionAsync(request),
                 AiProvider.DeepSeek => await _deepSeekService.GetCommandSuggestionAsync(request),
+                AiProvider.Ollama => await _ollamaService.GetCommandSuggestionAsync(request),
                 _ => throw new ArgumentException($"Unsupported AI provider: {request.Provider}")
             };
         }

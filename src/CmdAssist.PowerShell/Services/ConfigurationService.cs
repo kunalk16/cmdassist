@@ -63,6 +63,11 @@ public class ConfigurationService : IConfigurationService
                 ApiKey = _configuration["DEEPSEEK_API_KEY"] ?? string.Empty,
                 ApiUrl = _configuration["DEEPSEEK_API_URL"] ?? "https://api.deepseek.com/v1",
                 Model = _configuration["DEEPSEEK_MODEL"] ?? "deepseek-chat"
+            },
+            Ollama = new OllamaConfiguration
+            {
+                Endpoint = _configuration["OLLAMA_ENDPOINT"] ?? "http://localhost:11434",
+                Model = _configuration["OLLAMA_MODEL"] ?? "qwen3"
             }
         };
     }
