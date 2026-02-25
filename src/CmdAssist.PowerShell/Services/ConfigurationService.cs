@@ -67,7 +67,7 @@ public class ConfigurationService : IConfigurationService
             Ollama = new OllamaConfiguration
             {
                 Endpoint = _configuration["OLLAMA_ENDPOINT"] ?? "http://localhost:11434",
-                Model = _configuration["OLLAMA_MODEL"] ?? "qwen3"
+                Model = _configuration["OLLAMA_MODEL"] ?? "llama3"
             }
         };
     }

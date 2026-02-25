@@ -84,13 +84,13 @@ $env:DEEPSEEK_MODEL = "deepseek-chat"  # Optional, defaults to deepseek-chat
 ### Ollama
 ```powershell
 $env:OLLAMA_ENDPOINT = "http://localhost:11434"  # Optional, defaults to localhost:11434
-$env:OLLAMA_MODEL = "qwen3"  # Required, must match a model you've pulled
+$env:OLLAMA_MODEL = "llama3"  # Required, must match a model you've pulled
 ```
 
 **Note**: Ollama requires a local installation. Install from [ollama.ai](https://ollama.ai), then pull a model:
 ```bash
-ollama pull qwen3
-# or other models like: codellama, mistral, llama3
+ollama pull llama3
+# or other models like: codellama, mistral, qwen3
 ```
 
 ### API Key Resources
