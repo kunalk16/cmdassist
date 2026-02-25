@@ -6,5 +6,5 @@ namespace CmdAssist.PowerShell.Models;
 public class OllamaConfiguration
 {
     public string Endpoint { get; set; } = "http://localhost:11434";
-    public string Model { get; set; } = "qwen3";
+    public string Model { get; set; } = "llama3";
 }

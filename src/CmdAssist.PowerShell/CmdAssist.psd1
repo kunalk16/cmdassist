@@ -6,7 +6,7 @@
     RootModule = 'CmdAssist.PowerShell.dll'
     
     # Version number of this module
-    ModuleVersion = '1.0.4'
+    ModuleVersion = '1.0.5'
     
     # ID used to uniquely identify this module
     GUID = 'adc41e35-80bd-482b-ad3b-7e876b571cb2'
